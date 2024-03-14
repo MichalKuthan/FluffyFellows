@@ -1,6 +1,9 @@
+import { updateHappiness } from './happinessMonitor.js'
+import { updateToilet } from './toiletMonitor.js'
+
 const petEffects = {
     cat: {
-        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: 1},
+        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2},
         toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         imageChange: {
             milk: "/cat/milk.gif",
@@ -19,7 +22,7 @@ const petEffects = {
             food: "cat/food.wav",
             wash: "cat/wash.wav",
             play1: "cat/play1.wav",
-            play2: "cat/play2.wav",
+            play2: "cat/play2.mp3",
             cuddle: "cat/cuddle.wav",
             dance: "cat/dance.mp3",
             sleep: "cat/sleep.wav",
@@ -27,7 +30,7 @@ const petEffects = {
         }
     },
     dog: {
-        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: 1},
+        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2},
         toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         imageChange: {
             milk: "/dog/milk.gif",
@@ -45,7 +48,7 @@ const petEffects = {
             food: "/dog/food.wav",
             wash: "/dog/wash.wav",
             play1: "/dog/play1.wav",
-            play2: "/dog/play2.wav",
+            play2: "/dog/play2.mp3",
             cuddle: "/dog/cuddle.mp3",
             dance: "/dog/dance.mp3",
             sleep: "/dog/sleep.wav",
@@ -154,12 +157,6 @@ function getCurrentPet() {
 
 
 
-function updateHappiness(change) {
-    const happinessMonitor = document.getElementById('happiness-monitor').querySelector('progress');
-    happinessMonitor.value = Math.min(Math.max(happinessMonitor.value + change, 0), 20); // Ensure value is within bounds
-}
 
-function updateToilet(change) {
-    const toiletMonitor = document.getElementById('toilet-monitor').querySelector('progress');
-    toiletMonitor.value = Math.min(Math.max(toiletMonitor.value + change, 0), 20); // Ensure value is within bounds
-}
+
+
