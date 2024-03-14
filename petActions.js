@@ -13,6 +13,17 @@ const petEffects = {
             sleep: "/cat/sleep.gif",
             toilet: "/cat/toilet.gif",
 
+        },
+        soundFile: {
+            milk: "cat/milk.wav",
+            food: "cat/food.wav",
+            wash: "cat/wash.wav",
+            play1: "cat/play1.wav",
+            play2: "cat/play2.wav",
+            cuddle: "cat/cuddle.wav",
+            dance: "cat/dance.mp3",
+            sleep: "cat/sleep.wav",
+            toilet: "cat/toilet.wav",
         }
     },
     dog: {
@@ -28,6 +39,17 @@ const petEffects = {
             dance: "/dog/dance.gif",
             sleep: "/dog/sleep.gif",
             toilet: "/dog/toilet.gif",
+        },
+        soundFile: {
+            milk: "/dog/milk.wav",
+            food: "/dog/food.wav",
+            wash: "/dog/wash.wav",
+            play1: "/dog/play1.wav",
+            play2: "/dog/play2.wav",
+            cuddle: "/dog/cuddle.mp3",
+            dance: "/dog/dance.mp3",
+            sleep: "/dog/sleep.wav",
+            toilet: "/dog/toilet.wav",
         }
     },
     // Add more pets and their effects for different actions as needed
@@ -96,6 +118,7 @@ function updatePetImage(imageFileName) {
 
 // Store the currently playing audio
 let currentAudio = null;
+let playPromise = null;
 
 function playSound(soundFileName) {
     // If there's an audio currently playing, stop it
@@ -107,7 +130,21 @@ function playSound(soundFileName) {
     // Initialize a new Audio object and play the specified sound file
     currentAudio = new Audio(`sounds/${soundFileName}`);
     currentAudio.loop = true;
-    currentAudio.play();
+    playPromise = currentAudio.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // Automatic playback started!
+            // Show playing UI.
+        })
+        .catch(error => {
+            // Auto-play was prevented
+            // Show paused UI.
+            console.log("Playback was prevented. Trying again...");
+            // Optionally, try to play again or show some UI to the user to start playback
+        });
+    }
+
 }
 
 function getCurrentPet() {

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Pet Care Game</h1>
     <div id="main-menu">
         <button id="start-game">Start</button>
         <button id="load-game" disabled>Load</button> <!-- Disabled for now -->
@@ -17,11 +18,15 @@
         <!-- Pet Selection -->
         <div id="choose-pet">
             <!-- Add buttons or elements for pet selection here -->
-            <button class="choose-pet-button" data-pet="cat">Cat</button>
-            <button class="choose-pet-button" data-pet="dog">Dog</button>
+            <button class="choose-pet-button" data-pet="cat">
+                <img src="/images/cat/defaultCat.gif" alt="Cat" style="width: 100px; height: auto;" data-pet="cat">
+            </button>
+            <button class="choose-pet-button" data-pet="dog">
+                <img src="/images/dog/defaultDog.gif" alt="Dog" style="width: 100px; height: auto;" data-pet="dog">
+            </button>
             <!-- Add more pets as needed -->
         </div>
-        
+      
         <!-- Placeholder for pet animations, actions, and monitors; hidden until a pet is selected -->
         <div id="pet-game" class="hidden">
             <div class="game-container">
