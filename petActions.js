@@ -1,9 +1,9 @@
-import { updateHappiness } from './happinessMonitor.js'
-import { updateToilet } from './toiletMonitor.js'
+import { updateHappiness } from './happinessMonitor.js';
+import { updateToilet } from './toiletMonitor.js';
 
 const petEffects = {
     cat: {
-        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2},
+        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2 },
         toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         imageChange: {
             milk: "/cat/milk.gif",
@@ -15,7 +15,6 @@ const petEffects = {
             dance: "/cat/dance.gif",
             sleep: "/cat/sleep.gif",
             toilet: "/cat/toilet.gif",
-
         },
         soundFile: {
             milk: "cat/milk.wav",
@@ -30,7 +29,7 @@ const petEffects = {
         }
     },
     dog: {
-        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2},
+        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2 },
         toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         imageChange: {
             milk: "/dog/milk.gif",
@@ -55,60 +54,44 @@ const petEffects = {
             toilet: "/dog/toilet.wav",
         }
     },
-    // Add more pets and their effects for different actions as needed
+    // Additional pets and their effects could be added here
 };
-
 
 export function initPetActions() {
     document.querySelectorAll('.pet-action').forEach(button => {
         button.addEventListener('click', (event) => {
-            const action = event.target.getAttribute('data-action');
-            switch(action) {
-                case 'milk':
-                case 'food':
-                case 'wash': // Add your new action here
-                case 'play1':
-                case 'play2':
-                case 'cuddle':
-                case 'dance':
-                case 'sleep':
-                case 'toilet':
-                    handleAction(action);
-                    break;
-                // Handle additional actions as needed
-                default:
-                    console.log(`Action ${action} is not recognized.`);
+            // Use closest to ensure we get the button with data-action attribute
+            const actionButton = event.target.closest('.pet-action');
+            const action = actionButton ? actionButton.getAttribute('data-action') : null;
+            if (action) {
+                handleAction(action);
+            } else {
+                console.log(`Action ${action} is not recognized.`);
             }
         });
     });
 }
 
-    //This function will take the action type as an argument and apply the effects accordingly.
 function handleAction(actionType) {
-    const currentPet = getCurrentPet(); 
+    const currentPet = getCurrentPet();
     if (!currentPet || !petEffects[currentPet]) {
         console.log('No pet selected or pet effects not defined');
         return;
     }
 
-    // Get the effects of the action for the current pet
     const effect = petEffects[currentPet];
     const happinessChange = effect.happinessChange[actionType];
     const toiletChange = effect.toiletChange[actionType];
 
-    // Handle Happiness monitor change
     if (happinessChange !== undefined) {
         updateHappiness(happinessChange);
     }
-    // Handle toilet monitor change
     if (toiletChange !== undefined) {
         updateToilet(toiletChange);
     }
-    // Handle Image Change
     if (effect.imageChange && effect.imageChange[actionType]) {
         updatePetImage(effect.imageChange[actionType]);
     }
-    // Handle Sound
     if (effect.soundFile && effect.soundFile[actionType]) {
         playSound(effect.soundFile[actionType]);
     }
@@ -119,44 +102,24 @@ function updatePetImage(imageFileName) {
     petAnimationDiv.innerHTML = `<img src="images/${imageFileName}" alt="Pet Animation">`;
 }
 
-// Store the currently playing audio
 let currentAudio = null;
-let playPromise = null;
 
 function playSound(soundFileName) {
-    // If there's an audio currently playing, stop it
     if (currentAudio) {
         currentAudio.pause();
-        currentAudio.currentTime = 0; // Reset the audio playback to the start
+        currentAudio.currentTime = 0;
     }
-
-    // Initialize a new Audio object and play the specified sound file
     currentAudio = new Audio(`sounds/${soundFileName}`);
     currentAudio.loop = true;
-    playPromise = currentAudio.play();
-
+    let playPromise = currentAudio.play();
     if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            // Automatic playback started!
-            // Show playing UI.
-        })
-        .catch(error => {
-            // Auto-play was prevented
-            // Show paused UI.
+        playPromise.then(_ => {}).catch(error => {
             console.log("Playback was prevented. Trying again...");
-            // Optionally, try to play again or show some UI to the user to start playback
         });
     }
-
 }
 
 function getCurrentPet() {
     const activePetButton = document.querySelector('.choose-pet-button.active');
     return activePetButton ? activePetButton.getAttribute('data-pet') : null;
 }
-
-
-
-
-
-

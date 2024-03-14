@@ -159,7 +159,7 @@ h1 {
 }
 
 #pet-actions img {
-    height: 40px; /* Adjust based on your design needs */
+    height: 55px; /* Adjust based on your design needs */
     width: auto; /* Keeps the aspect ratio of the images */
 }
 
@@ -213,3 +213,17 @@ div {
     border-radius: 25px; /* Adjust the pixel value to control the roundness */
 }
 
+.pet-action {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    /* Add your existing styles here */
+}
+
+.pet-action:hover {
+    background-color: #f0f0f0; /* Light grey background on hover */
+    transform: scale(1.35); /* Slightly enlarge the button on hover */
+}
+
+.pet-action:active {
+    transform: scale(0.95); /* Slightly shrink the button when clicked */
+}
