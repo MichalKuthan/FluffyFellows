@@ -1,7 +1,7 @@
 const petEffects = {
     cat: {
-        happinessChange: { milk: 2, food: 3 },
-        toiletChange: { milk: 1, food: 2 },
+        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: 1},
+        toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         imageChange: {
             milk: "/cat/milk.gif",
             food: "/cat/food.gif",
@@ -27,8 +27,8 @@ const petEffects = {
         }
     },
     dog: {
-        happinessChange: { milk: 3, food: 2 },
-        toiletChange: { milk: -1, food: 1 },
+        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: 1},
+        toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         imageChange: {
             milk: "/dog/milk.gif",
             food: "/dog/food.gif",

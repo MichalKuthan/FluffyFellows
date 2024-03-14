@@ -3,18 +3,94 @@ body {
     background-color: peachpuff; /* Gives the background a peachy color */
 }
 
-#pet-div, #shop-div {
-    margin: 20px;
+h1 {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    color: #0096FF; /* A bright Furby blue */
+    font-family: 'Comic Sans MS', 'Arial', sans-serif; /* A playful font choice */
+    font-size: 3em; 
+    text-shadow: 2px 2px 4px #000000; /* Adds a slight shadow for depth */
+    text-align: center; /* Centers the heading */
+    padding: 10px; /* Adds some space around the text */
+    background-color: #E0F7FA; /* A light blue background for contrast */
+    border-radius: 10px; /* Soft rounded corners */
+    display: inline-block; /* Allows padding and background to shape around the text */
+    margin: 20px auto; /* Vertical spacing and horizontally center the element */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for a "lifted" look */
+}
+
+#main-menu {
+    position: absolute;
+    top: 15%;
+    left: 34%;
+    margin: 10px auto; /* Vertical margins are kept as 20px, and horizontal margins are set to auto */
+    padding: 10px;
+    height: 30%;
+    width: 30%;
+    border-radius: 5px;
+    background: lavenderblush; /* Keeps your chosen background color */
+    text-align: center; /* This will center the text or inline/inline-block elements inside #main-menu */   
+}
+
+#main-menu button {
+    font-size: 28px; /* Larger font size for readability */
+    color: #FFFFFF; /* White text color for contrast */
+    background-color: #FFA07A; /* Soft, playful orange color */
+    border: 2px solid #FFD700; /* Golden border for emphasis */
+    border-radius: 10px; /* Rounded edges for a softer look */
+    padding: 12px 24px; /* Adequate padding for a larger click area */
+    margin: 0 10px; /* Space between buttons */
+    cursor: pointer; /* Indicates the button is clickable */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth transitions for interactivity */
+}
+
+#main-menu button:hover, #main-menu button:focus {
+    background-color: #FF4500; /* Darker shade on hover/focus for visual feedback */
+    transform: scale(1.1); /* Slightly enlarges the button to indicate it's active */
+    outline: none; /* Removes the default focus outline */
+}
+
+#main-menu button:disabled {
+    background-color: #B0C4DE; /* Lighter color indicates the button is inactive */
+    cursor: not-allowed; /* Cursor indicates the button cannot be clicked */
+}
+
+#pet-div {
+    position: absolute;
+    top: 15%;
+    left: 34%;
+    margin: 20px auto;
     padding: 10px;
     border-radius: 5px;
+    height: 30%;
+    width: 30%;
     background: lavenderblush; /* A light, appealing background color for these sections */
 }
 
+#choose-pet {
+    display: flex; /* Establishes a flex container */
+    justify-content: center; /* Centers the buttons within the container */
+    flex-wrap: wrap; /* Allows buttons to wrap to the next line if the container is too narrow */
+    gap: 10px; /* Adds some space between the buttons */
+}
 
+.choose-pet-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 10px;
+}
 
+.choose-pet-button:hover, .choose-pet-button:focus {
+    outline: 2px solid #ccc; /* Highlight on hover/focus for visibility */
+}
 
-
-
+#choose-pet.hidden {
+    display: none;
+}
 
 
 .hidden {
@@ -31,7 +107,7 @@ body {
 }
 
 #pet-animation {
-    width: 30%; /* Fixed width */
+    width: 90%; /* Fixed width */
     height: 30vh; /* Fixed height, adjust both width and height as needed */
     display: flex;
     justify-content: center;
@@ -50,17 +126,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Centers the image perfectly within the container */
-}
-
-#monitors {
-    position: absolute;
-    right: 23%;
-    top: 5%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex-grow: 0; /* Prevents the monitors from growing */
-    flex-shrink: 0; /* Prevents the monitors from shrinking */
 }
 
 #pet-actions {
@@ -97,37 +162,54 @@ body {
     height: 40px; /* Adjust based on your design needs */
     width: auto; /* Keeps the aspect ratio of the images */
 }
-.choose-pet-button {
+
+#monitors {
+    position: absolute;
+    right: -70%;
+    top: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increased gap for clarity */
+    align-items: center; /* Center the items if needed */
+}
+
+#monitors > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the middle */
+    gap: 10px; /* Space between icon and progress bar */
+}
+
+#monitors img {
+    width: 80px; /* Larger size for icons */
+    height: auto; /* Maintain aspect ratio */
+}
+
+#monitors progress {
+    width: 250px;
+    height: 25px;
+    appearance: none;
+    -webkit-appearance: none;
     border: none;
-    background: none;
-    cursor: pointer;
-    padding: 10px;
+    color: #00FF00; /* For IE10 */
 }
 
-.choose-pet-button:hover, .choose-pet-button:focus {
-    outline: 2px solid #ccc; /* Highlight on hover/focus for visibility */
+#monitors progress::-webkit-progress-bar {
+    background-color: #E0F7FA;
+    border-radius: 10px;
 }
 
-#main-menu button {
-    font-size: 18px; /* Larger font size for readability */
-    color: #FFFFFF; /* White text color for contrast */
-    background-color: #FFA07A; /* Soft, playful orange color */
-    border: 2px solid #FFD700; /* Golden border for emphasis */
-    border-radius: 10px; /* Rounded edges for a softer look */
-    padding: 12px 24px; /* Adequate padding for a larger click area */
-    margin: 0 10px; /* Space between buttons */
-    cursor: pointer; /* Indicates the button is clickable */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth transitions for interactivity */
+#monitors progress::-webkit-progress-value {
+    background: linear-gradient(to right, orange, green);
+    border-radius: 10px;
 }
 
-#main-menu button:hover, #main-menu button:focus {
-    background-color: #FF4500; /* Darker shade on hover/focus for visual feedback */
-    transform: scale(1.1); /* Slightly enlarges the button to indicate it's active */
-    outline: none; /* Removes the default focus outline */
+#monitors progress::-moz-progress-bar {
+    background: linear-gradient(to right, orange, green);
+    border-radius: 10px;
 }
 
-#main-menu button:disabled {
-    background-color: #B0C4DE; /* Lighter color indicates the button is inactive */
-    cursor: not-allowed; /* Cursor indicates the button cannot be clicked */
+div {
+    border-radius: 25px; /* Adjust the pixel value to control the roundness */
 }
+
