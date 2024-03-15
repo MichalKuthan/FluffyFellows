@@ -1,18 +1,21 @@
 import { initPetActions } from './petActions.js';
 import { startDecreasingHappiness } from './happinessMonitor.js';
 import { startDecreasingToilet } from './toiletMonitor.js';
+import { initPetActions, stopCurrentAudio } from './petActions.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu and buttons
     const startButton = document.getElementById('start-game');
     const exitButton = document.getElementById('exit-game');
     const mainMenu = document.getElementById('main-menu');
+    const returnButton = document.querySelector('.return-button');
     
     // Pet selection and game elements
     const petDiv = document.getElementById('pet-div');
     const choosePetSection = document.getElementById('choose-pet');
     const petGameSection = document.getElementById('pet-game');
-
+    
 
     // Function to show the pet selection section
     function showPetSelection() {
@@ -41,11 +44,32 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Exiting game...');
     });
 
+    // Added event listener for return button
+returnButton.addEventListener('click', () => {
+    returnButton.addEventListener('click', () => {
+        stopCurrentAudio(); 
+    
+    // Check if there's an audio currently playing
+    if (currentAudio) {
+        currentAudio.pause(); // Pause the audio
+        currentAudio.currentTime = 0; // Reset audio to the start
+    }
+
+    petDiv.classList.add('hidden'); // Hide the pet selection container
+    petGameSection.classList.add('hidden'); // Hide the game section
+    mainMenu.classList.remove('hidden'); // Show the main menu again
+    // Reset coin count to 0
+    document.getElementById('coin-count').textContent = '0';
+});
+
     // Initialize pet selection buttons
     document.querySelectorAll('.choose-pet-button').forEach(button => {
         button.addEventListener('click', (event) => {
             const chosenPet = event.target.getAttribute('data-pet');
             console.log(`Pet chosen: ${chosenPet}`);
+
+            // Reset coin count when a new pet is chosen
+            resetCoinCount();
 
             markPetAsActive(chosenPet);
 
@@ -64,6 +88,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Function to reset and update coin count
+function resetCoinCount() {
+    coinCount = 0; // Reset the count
+    document.getElementById('coin-count').textContent = coinCount; // Update the display
+}
+
     // Call initPetActions once to initialize pet action buttons
     initPetActions();
+});
+
+// Initial coin count
+let coinCount = 0;
+
+// Function to increment and update coin count
+function incrementCoinCount() {
+    coinCount++; // Increment the count
+    document.getElementById('coin-count').textContent = coinCount; // Update the display
+}
+
+// Assuming you already have a setup similar to this for handling pet actions
+document.querySelectorAll('.pet-action').forEach(button => {
+    button.addEventListener('click', (event) => {
+        // Your existing action handling logic
+        // ...
+
+        // Call the function to increment and update the coin count
+        incrementCoinCount();
+    });
 });
