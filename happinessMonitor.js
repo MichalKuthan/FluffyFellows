@@ -12,3 +12,8 @@ export function startDecreasingHappiness() {
         updateHappiness(decreaseAmount);
     }, intervalTime);
 }
+// reset monitor
+export function resetHappinessMonitor() {
+    const happinessMonitor = document.getElementById('happiness-monitor').querySelector('progress');
+    happinessMonitor.value = 10; // Reset to default or starting value
+}

@@ -11,3 +11,8 @@ export function startDecreasingToilet() {
         updateToilet(decreaseAmount);
     }, intervalTime);
 }
+//reset monitor
+export function resetToiletMonitor() {
+    const toiletMonitor = document.getElementById('toilet-monitor').querySelector('progress');
+    toiletMonitor.value = 10; // Reset to default or starting value
+}

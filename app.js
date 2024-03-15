@@ -1,6 +1,8 @@
 import { initPetActions } from './petActions.js';
 import { startDecreasingHappiness } from './happinessMonitor.js';
 import { startDecreasingToilet } from './toiletMonitor.js';
+import { resetHappinessMonitor } from './happinessMonitor.js';
+import { resetToiletMonitor } from './toiletMonitor.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu and buttons
@@ -62,9 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Reset coin count when a new pet is chosen
             resetCoinCount();
-
+            // Reset the monitors whenever a new pet is chosen
+            resetHappinessMonitor();
+            resetToiletMonitor();
             markPetAsActive(chosenPet);
-
             choosePetSection.classList.add('hidden');
             petGameSection.classList.remove('hidden');
             startDecreasingHappiness(); // Start decreasing happiness over time
