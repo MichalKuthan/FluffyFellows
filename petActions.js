@@ -1,5 +1,6 @@
 import { updateHappiness } from './happinessMonitor.js';
 import { updateToilet } from './toiletMonitor.js';
+import { playSound } from './app.js';
 
 const petEffects = {
     cat: {
@@ -102,22 +103,7 @@ function updatePetImage(imageFileName) {
     petAnimationDiv.innerHTML = `<img src="images/${imageFileName}" alt="Pet Animation">`;
 }
 
-let currentAudio = null;
 
-function playSound(soundFileName) {
-    if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-    }
-    currentAudio = new Audio(`sounds/${soundFileName}`);
-    currentAudio.loop = true;
-    let playPromise = currentAudio.play();
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {}).catch(error => {
-            console.log("Playback was prevented. Trying again...");
-        });
-    }
-}
 
 function getCurrentPet() {
     const activePetButton = document.querySelector('.choose-pet-button.active');

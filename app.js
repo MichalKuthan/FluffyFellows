@@ -44,6 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Added event listener for return button
     returnButton.addEventListener('click', () => {
+        if (currentAudio) {
+            currentAudio.pause(); // Pause the audio
+            currentAudio.currentTime = 0; // Reset audio to the start
+        }
+
         petDiv.classList.add('hidden'); // Hide the pet selection container
         petGameSection.classList.add('hidden'); // Hide the game section
         mainMenu.classList.remove('hidden'); // Show the main menu again
@@ -107,3 +112,20 @@ document.querySelectorAll('.pet-action').forEach(button => {
 
     
 });
+
+let currentAudio = null;
+
+export function playSound(soundFileName) {
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+    currentAudio = new Audio(`sounds/${soundFileName}`);
+    currentAudio.loop = true;
+    let playPromise = currentAudio.play();
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {}).catch(error => {
+            console.log("Playback was prevented. Trying again...");
+        });
+    }
+}
