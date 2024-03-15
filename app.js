@@ -1,8 +1,6 @@
 import { initPetActions } from './petActions.js';
 import { startDecreasingHappiness } from './happinessMonitor.js';
 import { startDecreasingToilet } from './toiletMonitor.js';
-import { initPetActions, stopCurrentAudio } from './petActions.js';
-
 
 document.addEventListener('DOMContentLoaded', () => {
     // Menu and buttons
@@ -45,22 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Added event listener for return button
-returnButton.addEventListener('click', () => {
     returnButton.addEventListener('click', () => {
-        stopCurrentAudio(); 
-    
-    // Check if there's an audio currently playing
-    if (currentAudio) {
-        currentAudio.pause(); // Pause the audio
-        currentAudio.currentTime = 0; // Reset audio to the start
-    }
-
-    petDiv.classList.add('hidden'); // Hide the pet selection container
-    petGameSection.classList.add('hidden'); // Hide the game section
-    mainMenu.classList.remove('hidden'); // Show the main menu again
-    // Reset coin count to 0
-    document.getElementById('coin-count').textContent = '0';
-});
+        petDiv.classList.add('hidden'); // Hide the pet selection container
+        petGameSection.classList.add('hidden'); // Hide the game section
+        mainMenu.classList.remove('hidden'); // Show the main menu again
+    });
 
     // Initialize pet selection buttons
     document.querySelectorAll('.choose-pet-button').forEach(button => {
@@ -116,4 +103,7 @@ document.querySelectorAll('.pet-action').forEach(button => {
         // Call the function to increment and update the coin count
         incrementCoinCount();
     });
+
+
+    
 });

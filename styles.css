@@ -7,25 +7,27 @@ h1 {
     position: absolute;
     top: 5%;
     left: 50%;
-    transform: translate(-50%, -50%); 
-    color: #0096FF; /* A bright Furby blue */
-    font-family: 'Comic Sans MS', 'Arial', sans-serif; /* A playful font choice */
-    font-size: 3em; 
-    text-shadow: 2px 2px 4px #000000; /* Adds a slight shadow for depth */
-    text-align: center; /* Centers the heading */
-    padding: 10px; /* Adds some space around the text */
-    background-color: #E0F7FA; /* A light blue background for contrast */
-    border-radius: 10px; /* Soft rounded corners */
-    display: inline-block; /* Allows padding and background to shape around the text */
-    margin: 20px auto; /* Vertical spacing and horizontally center the element */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for a "lifted" look */
+    transform: translate(-50%, -50%);
+    color: #FFFFFF; /* Matching the white text color for contrast */
+    font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Keeping the playful font choice */
+    font-size: 28px; /* Adjusted to match the button's larger font size for readability */
+    text-shadow: 2px 2px 4px #000000; /* Keeps the slight shadow for depth */
+    text-align: center; /* Ensures the heading is centered */
+    padding: 12px 24px; /* Matching the padding to shape around the text like the buttons */
+    background-color: #FFA07A; /* Matching the soft, playful orange color */
+    border: 2px solid #FFD700; /* Matching the golden border for emphasis */
+    border-radius: 10px; /* Keeping the soft rounded corners */
+    display: inline-block; /* Ensuring padding and background shape around the text */
+    margin: 20px auto; /* Adjusting vertical spacing and horizontally centering the element */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Matching the subtle shadow for a "lifted" look */
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Adding smooth transitions for interactivity */
 }
 
 #main-menu {
     position: absolute;
     top: 15%;
     left: 34%;
-    margin: 10px auto; /* Vertical margins are kept as 20px, and horizontal margins are set to auto */
+    margin: 20px auto; /* Vertical margins are kept as 20px, and horizontal margins are set to auto */
     padding: 10px;
     height: 30%;
     width: 30%;
@@ -41,7 +43,7 @@ h1 {
     border: 2px solid #FFD700; /* Golden border for emphasis */
     border-radius: 10px; /* Rounded edges for a softer look */
     padding: 12px 24px; /* Adequate padding for a larger click area */
-    margin: 0 10px; /* Space between buttons */
+    margin: 100px 10px; /* Space between buttons */
     cursor: pointer; /* Indicates the button is clickable */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
     transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth transitions for interactivity */
@@ -56,6 +58,21 @@ h1 {
 #main-menu button:disabled {
     background-color: #B0C4DE; /* Lighter color indicates the button is inactive */
     cursor: not-allowed; /* Cursor indicates the button cannot be clicked */
+}
+
+.return-button {
+    font-size: 28px; /* Larger font size for readability */
+    color: #FFFFFF; /* White text color for contrast */
+    background-color: #FFA07A; /* Soft, playful orange color */
+    border: 2px solid #FFD700; /* Golden border for emphasis */
+    border-radius: 10px; /* Rounded edges for a softer look */
+    padding: 12px 24px; /* Adequate padding for a larger click area */
+    margin: -470px 130px; /* Space between buttons */
+    position: absolute;
+    left: -60%;
+    cursor: pointer; /* Indicates the button is clickable */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth transitions for interactivity */
 }
 
 #pet-div {
@@ -78,15 +95,32 @@ h1 {
 }
 
 .choose-pet-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 10px;
+    display: inline-block; /* Allows the use of margin and padding */
+    margin: 70px 10px; /* Space around the buttons */
+    padding: 12px; /* Padding around the content inside the button */
+    cursor: pointer; /* Changes the cursor to indicate clickable */
+    border: 2px solid #FFD700; /* Golden border for emphasis, similar to menu buttons */
+    border-radius: 10px; /* Rounded edges for a softer look */
+    background-color: #FFA07A; /* Soft, playful orange color, similar to menu buttons */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth, similar to menu buttons */
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth transitions for interactivity, similar to menu buttons */
 }
 
-.choose-pet-button:hover, .choose-pet-button:focus {
-    outline: 2px solid #ccc; /* Highlight on hover/focus for visibility */
+.choose-pet-button img {
+    display: block;
+    max-width: 100%; /* Ensures image does not exceed button size */
+    height: auto; /* Maintains aspect ratio */
 }
+
+.choose-pet-button:hover, .return-button:hover {
+    background-color: #FF4500; /* Darker shade on hover/focus for visual feedback, similar to menu buttons */
+    transform: scale(1.05); /* Slightly enlarges the button on hover to indicate it's active, similar to menu buttons */
+}
+
+.choose-pet-button:active {
+    transform: scale(0.95); /* Slightly shrinks the button when clicked, providing feedback */
+}
+
 
 #choose-pet.hidden {
     display: none;
@@ -226,4 +260,26 @@ div {
 
 .pet-action:active {
     transform: scale(0.95); /* Slightly shrink the button when clicked */
+}
+
+#coin-counter {
+    position: absolute;
+    top: 50%;
+    right: -11%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-image: url('path/to/your/coin-image.png'); /* Update with your image path */
+    background-size: cover; /* Cover the entire div */
+}
+
+#coin-counter img {
+    width: 50px; /* Adjust as necessary */
+    transition: transform 0.5s ease-in-out;
+}
+
+#coin-counter span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFD700;
 }
