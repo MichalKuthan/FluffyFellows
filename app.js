@@ -3,11 +3,54 @@ import { startDecreasingHappiness } from './happinessMonitor.js';
 import { startDecreasingToilet } from './toiletMonitor.js';
 import { resetHappinessMonitor } from './happinessMonitor.js';
 import { resetToiletMonitor } from './toiletMonitor.js';
+import { saveGameState } from './saveGame.js';
+import { loadGameState } from './loadGame.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+     // Ensure choose-pet is hidden at start
+     document.getElementById('choose-pet').classList.add('hidden');
     // Menu and buttons
     const startButton = document.getElementById('start-game');
+    //Save button
+    const saveButton = document.getElementById('save-game');
+    saveButton.addEventListener('click', async () => {
+        const gameState = {
+            // Your game state here. This should be dynamically generated from your game's current state
+            username: "user1",
+            petname: currentPet,
+            state: {
+                coins: parseInt(document.getElementById('coin-count').textContent, 10),
+                inventory: ["item1", "item2"] // Example inventory items
+            }
+        };
+
+        try {
+            await saveGameState(gameState);
+            alert('Game saved successfully!');
+        } catch (error) {
+            console.error('Error saving game:', error);
+            alert('Failed to save game.');
+        }
+    });
+    //Load Button
+    const loadButton = document.getElementById('load-game');
+    loadButton.addEventListener('click', async () => {
+        const username = "user1"; // This should be dynamically set, perhaps through user input
+
+        try {
+            const gameState = await loadGameState(username);
+            console.log(gameState);
+            alert('Game loaded successfully!');
+        } catch (error) {
+            console.error('Error loading game:', error);
+            alert('Failed to load game.');
+        }
+    });
     const exitButton = document.getElementById('exit-game');
+    exitButton.addEventListener('click', () => {
+        // Placeholder action for the exit button
+        alert('Exiting game...');
+    });
     const mainMenu = document.getElementById('main-menu');
     const returnButton = document.querySelector('.return-button');
     
@@ -15,7 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const petDiv = document.getElementById('pet-div');
     const choosePetSection = document.getElementById('choose-pet');
     const petGameSection = document.getElementById('pet-game');
-    
+
+     // Placeholder for game state
+     let currentPet = 'cat'; // This should be dynamic based on user selection
 
     // Function to show the pet selection section
     function showPetSelection() {
@@ -24,6 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
         choosePetSection.classList.remove('hidden'); // Ensure the pet selection section is visible
         petGameSection.classList.add('hidden'); // Ensure the game section is hidden until a pet is chosen
     }
+
+    // Initialize other game functionalities
+    initPetActions();
 
     // Function to mark the chosen pet as active
     function markPetAsActive(chosenPet) {
@@ -37,13 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize event listeners for menu buttons
-    startButton.addEventListener('click', showPetSelection);
-
-    exitButton.addEventListener('click', () => {
-        // Placeholder action for the exit button
-        alert('Exiting game...');
+    startButton.addEventListener('click', () => {
+        // Show pet selection, hide main menu
+        showPetSelection();
     });
 
+   
+    
     // Added event listener for return button
     returnButton.addEventListener('click', () => {
         if (currentAudio) {
@@ -54,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         petDiv.classList.add('hidden'); // Hide the pet selection container
         petGameSection.classList.add('hidden'); // Hide the game section
         mainMenu.classList.remove('hidden'); // Show the main menu again
+    
     });
 
     // Initialize pet selection buttons

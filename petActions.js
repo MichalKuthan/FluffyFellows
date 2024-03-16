@@ -7,15 +7,15 @@ const petEffects = {
         happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2 },
         toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         imageChange: {
-            milk: "/cat/milk.gif",
-            food: "/cat/food.gif",
-            wash: "/cat/wash.gif",
-            play1: "/cat/play1.gif",
-            play2: "/cat/play2.gif",
-            cuddle: "/cat/cuddle.gif",
-            dance: "/cat/dance.gif",
-            sleep: "/cat/sleep.gif",
-            toilet: "/cat/toilet.gif",
+            milk: "cat/milk.gif",
+            food: "cat/food.gif",
+            wash: "cat/wash.gif",
+            play1: "cat/play1.gif",
+            play2: "cat/play2.gif",
+            cuddle: "cat/cuddle.gif",
+            dance: "cat/dance.gif",
+            sleep: "cat/sleep.gif",
+            toilet: "cat/toilet.gif",
         },
         soundFile: {
             milk: "cat/milk.wav",
@@ -44,15 +44,15 @@ const petEffects = {
             toilet: "/dog/toilet.gif",
         },
         soundFile: {
-            milk: "/dog/milk.wav",
-            food: "/dog/food.wav",
-            wash: "/dog/wash.wav",
-            play1: "/dog/play1.wav",
-            play2: "/dog/play2.mp3",
-            cuddle: "/dog/cuddle.mp3",
-            dance: "/dog/dance.mp3",
-            sleep: "/dog/sleep.wav",
-            toilet: "/dog/toilet.wav",
+            milk: "dog/milk.wav",
+            food: "dog/food.wav",
+            wash: "dog/wash.wav",
+            play1: "dog/play1.wav",
+            play2: "dog/play2.mp3",
+            cuddle: "dog/cuddle.mp3",
+            dance: "dog/dance.mp3",
+            sleep: "dog/sleep.wav",
+            toilet: "dog/toilet.wav",
         }
     },
     // Additional pets and their effects could be added here
@@ -102,6 +102,8 @@ function updatePetImage(imageFileName) {
     const petAnimationDiv = document.getElementById('pet-animation');
     petAnimationDiv.innerHTML = `<img src="images/${imageFileName}" alt="Pet Animation">`;
 }
+
+
 
 
 

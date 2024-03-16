@@ -10,13 +10,14 @@
     <h1>PET CARE GAME</h1>
     <div id="main-menu">
         <button id="start-game">Start</button>
-        <button id="load-game" disabled>Load</button> <!-- Disabled for now -->
+        <button id="save-game">Save</button> <!-- Disabled for now -->
+        <button id="load-game">Load</button> <!-- Disabled for now -->
         <button id="exit-game">Exit</button>
     </div>
 
     <div id="pet-div" class="hidden">
         <!-- Pet Selection -->
-        <div id="choose-pet">
+        <div id="choose-pet" class="hidden">
             <!-- Add buttons or elements for pet selection here -->
             <button class="choose-pet-button" data-pet="cat">
                 <img src="/images/cat/defaultCat.gif" alt="Cat" style="width: 100px; height: auto;" data-pet="cat">
@@ -41,8 +42,11 @@
                         <progress value="10" max="20"></progress>
                     </div>
                 </div>
-                        <div id="coin-counter"><span id="coin-count">0</span></div>
-                        
+                <div id="coin-counter">
+                    <img src="/images/icons/coin.png" alt="Coin" /> 
+                    <div><span id="coin-count">0</span></div>
+                </div>
+
 
             </div>
 
