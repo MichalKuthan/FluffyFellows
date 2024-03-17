@@ -294,10 +294,11 @@ div {
 
 #coin-counter span {
     font-size: 24px;
+    color: #050505;
     font-weight: bold;
-    color: #ffd900d7; /* Gold color for the coin count */
-    /* You might need to adjust text shadow if the text is not legible over the coin */
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-family: 'Comic Sans MS', 'Arial', sans-serif;
+    text-shadow: 2px 2px 4px #ffffff;
+   
 }
 
 @media (max-width: 768px) {
@@ -329,4 +330,19 @@ div {
         width: 100%; /* Use full width for layout consistency */
         order: 3; /* Position monitors below pet actions in a stacked layout */
     }
+}
+
+.divider {
+    height: 5px; /* Thickness of the divider */
+    background-color: peachpuff; /* Color of the divider */
+    margin: 20px 0; /* Space above and below the divider */
+}
+
+#name-inputs input {
+    margin: 5px;
+    padding: 5px;
+}
+#confirm-selection, #back-to-menu {
+    margin: 5px;
+    padding: 5px;
 }

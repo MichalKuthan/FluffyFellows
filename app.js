@@ -6,11 +6,19 @@ import { resetToiletMonitor } from './toiletMonitor.js';
 import { saveGameState } from './saveGame.js';
 import { loadGameState } from './loadGame.js';
 
+
 document.addEventListener('DOMContentLoaded', () => {
      // Ensure choose-pet is hidden at start
      document.getElementById('choose-pet').classList.add('hidden');
     // Menu and buttons
+    const mainMenu = document.getElementById('main-menu');
+    // Start Button
     const startButton = document.getElementById('start-game');
+    startButton.addEventListener('click', () => {
+        // Show pet selection, hide main menu
+        showPetSelection();
+    });
+    
     //Save button
     const saveButton = document.getElementById('save-game');
     saveButton.addEventListener('click', async () => {
@@ -32,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Failed to save game.');
         }
     });
+    
     //Load Button
     const loadButton = document.getElementById('load-game');
     loadButton.addEventListener('click', async () => {
@@ -51,8 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
         // Placeholder action for the exit button
         alert('Exiting game...');
     });
-    const mainMenu = document.getElementById('main-menu');
+
     const returnButton = document.querySelector('.return-button');
+          returnButton.addEventListener('click', () => {
+        if (currentAudio) {
+            currentAudio.pause(); // Pause the audio
+            currentAudio.currentTime = 0; // Reset audio to the start
+        }
+
+        petDiv.classList.add('hidden'); // Hide the pet selection container
+        petGameSection.classList.add('hidden'); // Hide the game section
+        mainMenu.classList.remove('hidden'); // Show the main menu again
+    
+    });
+
+    
     
     // Pet selection and game elements
     const petDiv = document.getElementById('pet-div');
@@ -83,27 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // Initialize event listeners for menu buttons
-    startButton.addEventListener('click', () => {
-        // Show pet selection, hide main menu
-        showPetSelection();
-    });
-
    
-    
-    // Added event listener for return button
-    returnButton.addEventListener('click', () => {
-        if (currentAudio) {
-            currentAudio.pause(); // Pause the audio
-            currentAudio.currentTime = 0; // Reset audio to the start
-        }
-
-        petDiv.classList.add('hidden'); // Hide the pet selection container
-        petGameSection.classList.add('hidden'); // Hide the game section
-        mainMenu.classList.remove('hidden'); // Show the main menu again
-    
-    });
 
     // Initialize pet selection buttons
     document.querySelectorAll('.choose-pet-button').forEach(button => {
@@ -138,25 +140,39 @@ function resetCoinCount() {
     document.getElementById('coin-count').textContent = coinCount; // Update the display
 }
 
-    // Call initPetActions once to initialize pet action buttons
-    initPetActions();
+   
 });
+ // Call initPetActions once to initialize pet action buttons
+ initPetActions();
 
 // Initial coin count
 let coinCount = 0;
 
 // Function to increment and update coin count
 function incrementCoinCount() {
-    coinCount++; // Increment the count
-    document.getElementById('coin-count').textContent = coinCount; // Update the display
+    const coinCountElement = document.getElementById('coin-count');
+    const coinImage = document.getElementById('coin-image');
+
+    // Hide the coin count and change the coin image to the animation
+    coinCountElement.style.display = 'none';
+    coinImage.src = '/images/icons/coinFlip.gif'; // Path to your animation
+
+    setTimeout(() => {
+        // Increment the coin count
+        let currentCount = parseInt(coinCountElement.textContent, 10);
+        coinCountElement.textContent = currentCount + 1;
+
+        // After 1.5 seconds, revert to the original coin image and show the updated count
+        coinImage.src = '/images/icons/coin.png'; // Path to your static coin image
+        coinCountElement.style.display = ''; // Show the coin count again
+    }, 1500); // 1.5 seconds delay
 }
 
-// Assuming you already have a setup similar to this for handling pet actions
+
+
 document.querySelectorAll('.pet-action').forEach(button => {
     button.addEventListener('click', (event) => {
-        // Your existing action handling logic
-        // ...
-
+       
         // Call the function to increment and update the coin count
         incrementCoinCount();
     });

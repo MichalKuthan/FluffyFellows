@@ -55,21 +55,25 @@ const petEffects = {
             toilet: "dog/toilet.wav",
         }
     },
-    // Additional pets and their effects could be added here
+    // Additional pets and their effects could be added here.
 };
+
+// Named function for handling button clicks
+function onPetActionButtonClick(event) {
+    const actionButton = event.target.closest('.pet-action');
+    const action = actionButton ? actionButton.getAttribute('data-action') : null;
+    if (action) {
+        handleAction(action);
+    } else {
+        console.log(`Action ${action} is not recognized.`);
+    }
+}
 
 export function initPetActions() {
     document.querySelectorAll('.pet-action').forEach(button => {
-        button.addEventListener('click', (event) => {
-            // Use closest to ensure we get the button with data-action attribute
-            const actionButton = event.target.closest('.pet-action');
-            const action = actionButton ? actionButton.getAttribute('data-action') : null;
-            if (action) {
-                handleAction(action);
-            } else {
-                console.log(`Action ${action} is not recognized.`);
-            }
-        });
+        // Remove the event listener before adding a new one to avoid duplication
+        button.removeEventListener('click', onPetActionButtonClick);
+        button.addEventListener('click', onPetActionButtonClick);
     });
 }
 
@@ -102,10 +106,6 @@ function updatePetImage(imageFileName) {
     const petAnimationDiv = document.getElementById('pet-animation');
     petAnimationDiv.innerHTML = `<img src="images/${imageFileName}" alt="Pet Animation">`;
 }
-
-
-
-
 
 function getCurrentPet() {
     const activePetButton = document.querySelector('.choose-pet-button.active');
