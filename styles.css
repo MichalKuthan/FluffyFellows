@@ -69,7 +69,7 @@ h1 {
     }
 }
 
-.return-button {
+.menu-button {
     font-size: 20px; /* Slightly smaller font size for balance */
     color: #FFFFFF;
     background-color: #FFA07A;
@@ -338,11 +338,9 @@ div {
     margin: 20px 0; /* Space above and below the divider */
 }
 
-#name-inputs input {
-    margin: 5px;
-    padding: 5px;
-}
-#confirm-selection, #back-to-menu {
-    margin: 5px;
-    padding: 5px;
+/* styles.css */
+#menu-divider {
+    height: 5px;
+    background-color: blue;
+    margin: 5px 0;
 }

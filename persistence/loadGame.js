@@ -2,9 +2,13 @@
 // You'll need to adjust these parts according to your specific game's requirements
 
 async function updateGameStateUI(gameState) {
-    // Example updates, adjust according to your actual UI and state structure
-    document.getElementById('coin-count').textContent = gameState.state.coins;
-    // Add more UI updates based on loaded game state...
+    // Update the UI based on the loaded game state
+    document.getElementById('player-name').value = gameState.username || '';
+    document.getElementById('pet-name').value = gameState.petname || '';
+    document.getElementById('coin-count').textContent = gameState.state.coins || 0;
+    document.getElementById('happiness-monitor').querySelector('progress').value = gameState.state.happinessLevel || 0;
+    document.getElementById('toilet-monitor').querySelector('progress').value = gameState.state.toiletLevel || 0;
+    // Add more UI updates based on the loaded game state...
 }
 
 export async function loadGameState(username) {

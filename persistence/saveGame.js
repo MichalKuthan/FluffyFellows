@@ -1,16 +1,19 @@
 // Function to collect current game state
 function getCurrentGameState() {
-    // Collect your game's current state here
-    // Example structure
+    // Fetch values from the input fields
+    const playerName = document.getElementById('player-name').value.trim();
+    const petName = document.getElementById('pet-name').value.trim();
+
+    // Collect the rest of your game's current state
     return {
-        username: "playerUsername", // Placeholder - replace with actual username
-        petname: "playerPetName", // Placeholder - replace with actual pet name chosen by the player
+        username: playerName, // Use the value from the input field
+        petname: petName, // Use the value from the input field
         state: {
             coins: parseInt(document.getElementById('coin-count').textContent, 10),
             inventory: ["item1", "item2"], // Example, replace with actual game state details
             happinessLevel: document.getElementById('happiness-monitor').querySelector('progress').value,
             toiletLevel: document.getElementById('toilet-monitor').querySelector('progress').value
-            // Add other relevant game state details
+            // Add other relevant game state details here
         }
     };
 }
