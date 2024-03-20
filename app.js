@@ -107,7 +107,7 @@ export function displayGameView() {
     document.getElementById('choose-pet').classList.add('hidden');
     document.getElementById('saved-games-list').classList.add('hidden');
     document.getElementById('load-selected-game').classList.add('hidden');
-
+    
     document.getElementById('pet-div').classList.remove('hidden');
     document.getElementById('pet-game').classList.remove('hidden');
 }

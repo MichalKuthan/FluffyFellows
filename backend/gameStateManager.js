@@ -1,6 +1,6 @@
-// gameStateManager.js
-
 import { loadGameState } from "../persistence/loadGame.js";
+
+
 
 export async function fetchAndDisplaySavedGames() {
     try {
@@ -28,13 +28,5 @@ function displaySavedGames(savedGames) {
     });
 }
 
-// Add event listener for "Load Selected Game" button
-document.getElementById('load-selected-game').addEventListener('click', async () => {
-    const gamesList = document.getElementById('saved-games-list');
-    const selectedGameId = gamesList.value;
-    if (selectedGameId) {
-        await loadGameState(selectedGameId);
-    } else {
-        alert('Please select a game to load.');
-    }
-});
+
+

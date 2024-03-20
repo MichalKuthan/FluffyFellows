@@ -31,15 +31,32 @@ app.post('/save', (req, res) => {
 });
 
 // Load game state by username
-app.get('/load/:username', (req, res) => {
-  GameState.findOne({ username: req.params.username })
-    .then(result => {
-      if (!result) {
-        return res.status(404).send('Game state not found');
-      }
-      res.send(result);
-    })
-    .catch(err => res.status(500).send(err));
+// server.js - Modify the load game state route to use ObjectId
+// server.js
+app.get('/load/:gameId', async (req, res) => {
+  try {
+    const gameId = req.params.gameId;
+    const gameState = await GameState.findById(gameId);
+    if (!gameState) {
+      return res.status(404).send('Game state not found');
+    }
+    res.send(gameState);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
+
+
 // Add more routes as needed
+
+// server.js - Route to fetch all saved games
+app.get('/games', async (req, res) => {
+  try {
+    const allGames = await GameState.find();
+    res.send(allGames);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Server error while fetching games');
+  }
+});
