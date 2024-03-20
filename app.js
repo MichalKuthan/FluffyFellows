@@ -4,6 +4,7 @@ import { saveGameState } from './persistence/saveGame.js';
 import { loadGameState } from './persistence/loadGame.js';
 import { stopSound } from './utils/util.js';
 import { resetGameStates } from './actions/gameActions.js';
+import { fetchAndDisplaySavedGames } from './backend/gameStateManager.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const newGameButton = document.getElementById('new-game');
@@ -16,10 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuDivider = document.getElementById('menu-divider');
     const returnGameButton = document.getElementById('return-game');
     const petDiv = document.getElementById('pet-div');
+    const savedGamesList = document.getElementById('saved-games-list');
+    const loadSelectedGameButton = document.getElementById('load-selected-game');
+    const backToMenuButton = document.getElementById('back-to-menu')
 
+    
+    // Function to hide the Loading buttons - select and button, when any other button pressed
+    function hideLoadGameControls() {
+        savedGamesList.style.display = 'none';
+        loadSelectedGameButton.style.display = 'none';
+    }
+    
     newGameButton.addEventListener('click', () => {
         resetGameStates();
-    
+        hideLoadGameControls();
         document.getElementById('main-menu').classList.add('hidden'); // Hide the main menu
         document.getElementById('pet-div').classList.remove('hidden'); // Show the game view
         document.getElementById('choose-pet').classList.remove('hidden'); // Show the choose-pet section
@@ -34,11 +45,36 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeGame();
     });
 
-    saveGameButton.addEventListener('click', saveGameState);
+    backToMenuButton.addEventListener('click', () => {
+        mainMenu.classList.remove('hidden'); // Hide the main menu
+        menuDivider.classList.add('hidden'); // Hide the divider
+        document.getElementById('pet-div').classList.add('hidden'); // hide the game view
+        document.getElementById('choose-pet').classList.add('hidden'); // hide the choose-pet section
+    }) 
 
+    saveGameButton.addEventListener('click', saveGameState);
+        hideLoadGameControls();
+    // Make the loadGameButton show the saved games list
     loadGameButton.addEventListener('click', async () => {
-        await loadGameState("user1"); // Modify as needed
+        savedGamesList.style.display = 'block';
+        loadSelectedGameButton.style.display = 'inline-block';
+        await fetchAndDisplaySavedGames(); // Fetch and display the list
+        savedGamesList.classList.remove('hidden'); // Show the dropdown
+        loadSelectedGameButton.classList.remove('hidden'); // Show the "Load Selected Game" button
     });
+
+    // Add an event listener for the "Load Selected Game" button
+    loadSelectedGameButton.addEventListener('click', async () => {
+        const selectedGameId = document.getElementById('saved-games-list').value;
+        if (selectedGameId) {
+            await loadGameState(selectedGameId);
+        } else {
+            alert("Please select a game to load.");
+        }
+    });
+
+    
+    
 
     exitGameButton.addEventListener('click', () => {
         alert('Exiting game...');
@@ -65,3 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
    initPetActions(); // Initialize pet selection
 });
+
+export function displayGameView() {
+    document.getElementById('main-menu').classList.add('hidden');
+    document.getElementById('choose-pet').classList.add('hidden');
+    document.getElementById('saved-games-list').classList.add('hidden');
+    document.getElementById('load-selected-game').classList.add('hidden');
+
+    document.getElementById('pet-div').classList.remove('hidden');
+    document.getElementById('pet-game').classList.remove('hidden');
+}
