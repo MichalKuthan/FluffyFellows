@@ -115,10 +115,14 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.3s ease;
+    width: 150px; 
+    height: 150px; 
+    padding: 20px; 
+    
 }
 
 .choose-pet-button img {
-    max-width: 100px; /* Set a max-width for images */
+    max-width: 150px; /* Set a max-width for images */
     height: auto; /* Maintain aspect ratio */
 }
 
@@ -127,8 +131,16 @@ h1 {
     transform: scale(1.05);
 }
 
-.choose-pet-button:active {
-    transform: scale(0.95); /* Slightly shrinks the button when clicked, providing feedback */
+.choose-pet-button:hover,
+.choose-pet-button.selected { /* Add the same styles as hover for the selected class */
+    background-color: #FF4500; /* Example hover and selected background color */
+    transform: scale(1.05); /* Example hover and selected transform */
+}
+
+.choose-pet-button.active,
+.choose-pet-button:hover {
+    background-color: #FF4500; /* Same as hover or distinct style for active */
+    transform: scale(1.05); /* Same transformation as hover for consistency */
 }
 
 
@@ -341,6 +353,97 @@ div {
 /* styles.css */
 #menu-divider {
     height: 5px;
-    background-color: blue;
+    background-color: peachpuff;
     margin: 5px 0;
+}
+
+
+#saved-games-list,
+#load-selected-game {
+  display: none; /* Initially hidden, shown when Load button is clicked */
+  margin: 0px auto; /* Center align and add some margin */
+
+}
+
+#saved-games-list {
+    width: 20%;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: large;
+    background-color: #5ebef9dc; /* Light gray background */
+    color: #333; /* Text color */
+    text-align-last: center; /* Center the selected option text */
+    -moz-text-align-last: center; /* Center the text for Firefox */
+    text-align: center; /* Attempt to center the text in the dropdown */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+
+  /* Hover effect for the button */
+#load-selected-game:hover {
+    background-color: #5ebef9dc; /* Darker shade of blue */
+ 
+  } 
+
+#load-selected-game {
+
+    width: 20%;
+    height: 50px;
+    font-size: 1.5em;
+    color: #FFFFFF;
+    background-color: #FFA07A;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#name-inputs {
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+#name-inputs input {
+    padding: 10px;
+    margin: 5px 17%; /* Space between the input fields */
+    width: 60%; /* Adjust based on your design */
+    font-size: 16px; /* Adjust font size as needed */
+    border: 2px solid #008cba; /* Border color to match the game's theme */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Soft shadow for depth */
+    outline: none; /* Removes the default focus outline */    
+}
+  
+#name-inputs input:focus {
+    border-color: #005f73; /* Darker shade when input is focused */
+}
+  
+#name-inputs input::placeholder {
+    color: #ccc; /* Placeholder text color */
+}
+  
+#confirm-selection,
+#back-to-menu {
+    width: 30%;
+    height: 50px;
+    font-size: 1.5em;
+    color: #FFFFFF;
+    background-color: #FFA07A;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 10px 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+#confirm-selection:hover,
+#back-to-menu:hover {
+    background-color: #FF4500;
+    transform: scale(1.05);
 }

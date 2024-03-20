@@ -3,6 +3,7 @@ import { resetToiletMonitor, startDecreasingToilet } from '/gameStates/toiletMon
 import { resetCoinCount } from '/gameStates/coinCount.js';
 import { setDefaultPetImage } from '/animations/animations.js'; 
 
+
 export function initializeGame() {
     const playerName = document.getElementById('player-name').value.trim();
     const petName = document.getElementById('pet-name').value.trim();
@@ -24,6 +25,7 @@ export function resetGameStates() {
     resetToiletMonitor();
     startDecreasingHappiness();
     startDecreasingToilet();
+    
 }
 
 

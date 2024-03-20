@@ -8,14 +8,15 @@ function getCurrentGameState() {
     return {
         username: playerName, // Use the value from the input field
         petname: petName, // Use the value from the input field
+        pettype: window.currentPet,
         state: {
             coins: parseInt(document.getElementById('coin-count').textContent, 10),
             inventory: ["item1", "item2"], // Example, replace with actual game state details
             happinessLevel: document.getElementById('happiness-monitor').querySelector('progress').value,
             toiletLevel: document.getElementById('toilet-monitor').querySelector('progress').value
-            // Add other relevant game state details here
+           
         }
-    };
+    };    
 }
 
 // Function to save current game state to the server

@@ -6,7 +6,7 @@ import { incrementCoinCount } from '/gameStates/coinCount.js'; // Make sure this
 
 const petEffects = {
     cat: {
-        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2 },
+        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -1 },
         toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         coinChange: { milk: 1, food: 1, wash: 1, play1: 1, play2: 1, cuddle: 1, dance: 1, sleep: 1, toilet: 1,},
         imageChange: {
@@ -33,7 +33,7 @@ const petEffects = {
         }
     },
     dog: {
-        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -2 },
+        happinessChange: { milk: 2, food: 2, wash: 1, play1: 2, play2: 2, cuddle: 3, dance: 3, sleep: 1, toilet: -1 },
         toiletChange: { milk: -3, food: -3, wash: -2, play1: -1, play2: -1, cuddle: -1, dance: -1, sleep: -2, toilet: 5 },
         coinChange: { milk: 1, food: 1, wash: 1, play1: 1, play2: 1, cuddle: 1, dance: 1, sleep: 1, toilet: 1,},
         imageChange: {
@@ -75,25 +75,38 @@ function onPetActionButtonClick(event) {
 
 export function initPetActions() {
     document.querySelectorAll('.choose-pet-button').forEach(button => {
-        button.addEventListener('click', event => {
-            // Remove 'active' class from all buttons
-            document.querySelectorAll('.choose-pet-button').forEach(btn => btn.classList.remove('active'));
+        button.addEventListener('click', function(event) {
+            // Find the closest button element to support clicks on the button itself or any child elements (like an image)
+            const buttonElement = event.target.closest('.choose-pet-button');
 
-            // Mark the selected button as 'active'
-            const selectedButton = event.target.closest('.choose-pet-button');
-            selectedButton.classList.add('active');
+            // Toggle the 'active' class only if it wasn't already active
+            if (!buttonElement.classList.contains('active')) {
+                // Remove 'active' class from all buttons
+                document.querySelectorAll('.choose-pet-button').forEach(btn => btn.classList.remove('active'));
+                // Add 'active' class to the clicked button
+                buttonElement.classList.add('active');
+            } else {
+                // Optional: if you want to allow deselecting the button by clicking it again
+                // buttonElement.classList.remove('active');
+            }
 
-            // Set the global currentPet to the selected pet's type
-            window.currentPet = selectedButton.getAttribute('data-pet');
+            // Update the global currentPet variable
+            window.currentPet = buttonElement.getAttribute('data-pet');
             console.log(`Pet chosen: ${window.currentPet}`);
+
+            // You might want to update the pet image or other game state here
         });
     });
 
+    // Attach event listeners for pet action buttons
     document.querySelectorAll('.pet-action').forEach(button => {
-        button.removeEventListener('click', onPetActionButtonClick); // This line might not be necessary if you're not dynamically adding/removing buttons
         button.addEventListener('click', onPetActionButtonClick);
     });
 }
+
+// Call initPetActions to initialize the functionality
+document.addEventListener('DOMContentLoaded', initPetActions);
+
 
 function handleAction(actionType) {
     const currentPet = window.currentPet; // Use the global currentPet
@@ -124,7 +137,7 @@ function handleAction(actionType) {
     }
 }
 
-function updatePetImage(imageFileName) {
+export function updatePetImage(imageFileName) {
     const petAnimationDiv = document.getElementById('pet-animation');
     const currentPet = getCurrentPet();
     petAnimationDiv.innerHTML = `<img src="images/${imageFileName}" alt="Pet Animation">`;
