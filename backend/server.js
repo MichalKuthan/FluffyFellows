@@ -23,11 +23,29 @@ app.get('/', (req, res) => {
 });
 
 // Save game state
-app.post('/save', (req, res) => {
-  const gameState = new GameState(req.body);
-  gameState.save()
-    .then(result => res.send(result))
-    .catch(err => res.status(400).send(err));
+// server.js
+app.post('/save', async (req, res) => {
+  const { username, petname, pettype, state } = req.body;
+
+  try {
+      // Check if a game state with the same username and petname already exists
+      let gameState = await GameState.findOne({ username, petname });
+
+      if (gameState) {
+          // If it exists, update the existing game state
+          gameState.pettype = pettype;
+          gameState.state = state;
+          await gameState.save();
+      } else {
+          // If it doesn't exist, create a new game state
+          gameState = new GameState({ username, petname, pettype, state });
+          await gameState.save();
+      }
+
+      res.json(gameState);
+  } catch (err) {
+      res.status(500).send({ message: 'Error saving game state', error: err });
+  }
 });
 
 // Load game state by username
