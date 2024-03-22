@@ -8,8 +8,8 @@ const gameStateSchema = new Schema({
   state: {
     coins: Number,
     inventory: [String],
-    happinessLevel: { type: Number, default: 0 }, // Added happinessLevel field with a default value
-    toiletLevel: { type: Number, default: 0 }, // Added toiletLevel field with a default value
+    happinessLevel: { type: Number, default: 0 }, 
+    toiletLevel: { type: Number, default: 0 }, 
   }
 }, { timestamps: true });
 
