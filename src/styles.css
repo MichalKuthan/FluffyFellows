@@ -405,7 +405,7 @@ div {
 
 #load-selected-game {
 
-    width: 20%;
+    width: auto;
     height: 50px;
     font-size: 1.3em;
     color: #FFFFFF;
@@ -416,6 +416,22 @@ div {
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, background-color 0.3s ease;
+    min-width: 20%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #load-selected-game {
+        font-size: 1em; /* Smaller font size for the button text on smaller screens */
+        padding: 10px 5px; /* Reduce padding on smaller screens to save space */
+        min-width: 50%; /* Increase minimum width for better visibility on smaller screens */
+    }
+
+    /* Consider adjusting the layout of buttons to ensure they fit on smaller screens */
+    #main-menu button {
+        width: auto; /* Allow buttons to grow */
+        min-width: 150px; /* Ensure buttons don't become too small */
+    }
 }
 
 #name-inputs {

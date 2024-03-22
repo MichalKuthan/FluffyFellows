@@ -19,11 +19,11 @@ export function setupGameControlListeners(savedGamesList, loadSelectedGameButton
 
     // Prepare to load a game
     loadGameButton.addEventListener('click', async () => {
-        // Display saved games list and load button
         savedGamesList.style.display = 'block';
         loadSelectedGameButton.style.display = 'inline-block';
         await fetchAndDisplaySavedGames(); // Fetch and display saved games
-        // Optionally, move display logic to UI utils for consistency
+        savedGamesList.classList.remove('hidden');
+        loadSelectedGameButton.classList.remove('hidden');
     });
 
     // Load the selected game state
