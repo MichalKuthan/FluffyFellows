@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Care Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/src/styles.css">
 </head>
 <body>
-    <h1>Pet Care Game</h1>
+    <h1>PET CARE GAME</h1>
     <div id="main-menu">
-        <button id="start-game">Start</button>
-        <button id="load-game" disabled>Load</button> <!-- Disabled for now -->
+         <!-- Return button, initially hidden -->
+        <button id="return-game" class="hidden">Return</button>
+                
+        <button id="new-game">Start</button>
+        <button id="save-game">Save</button> 
+        <button id="load-game">Load</button> 
         <button id="exit-game">Exit</button>
     </div>
 
     <div id="pet-div" class="hidden">
         <!-- Pet Selection -->
-        <div id="choose-pet">
+        <div id="choose-pet" class="hidden">
             <!-- Add buttons or elements for pet selection here -->
             <button class="choose-pet-button" data-pet="cat">
                 <img src="/images/cat/defaultCat.gif" alt="Cat" style="width: 100px; height: auto;" data-pet="cat">
@@ -25,44 +29,65 @@
                 <img src="/images/dog/defaultDog.gif" alt="Dog" style="width: 100px; height: auto;" data-pet="dog">
             </button>
             <!-- Add more pets as needed -->
+             <!-- New input fields for Player's Name and Pet's Name -->
+             <div id="name-inputs">
+                <input type="text" id="player-name" placeholder="Player's Name" />
+                <input type="text" id="pet-name" placeholder="Pet's Name" />
+            </div>
+
+            <!-- New "OK" and "Back" buttons -->
+            <button id="confirm-selection">Ok</button>
+            <button id="back-to-menu">Back</button>
         </div>
-      
+    
         <!-- Placeholder for pet animations, actions, and monitors; hidden until a pet is selected -->
         <div id="pet-game" class="hidden">
             <div class="game-container">
                 <div id="pet-animation"></div>
                 <div id="monitors">
                     <div id="happiness-monitor">
-                        <img src="/images/icons/happiness-icon.png" alt="Happiness" style="height: 24px; width: 24px;">
+                        <img src="/images/icons/happiness-icon.png" alt="Happiness" style="height: 45px; width: 45px;">
                         <progress value="10" max="20"></progress>
                     </div>
                     <div id="toilet-monitor">
-                        <img src="images/icons/toilet.png" alt="Toilet" style="height: 24px; width: 24px;">
+                        <img src="images/icons/toilet.png" alt="Toilet" style="height: 45px; width: 45px;">
                         <progress value="10" max="20"></progress>
                     </div>
                 </div>
+                <div id="coin-counter">
+                    <img src="/images/icons/coin.png" alt="Coin" id="coin-image" /> 
+                    <div><span id="coin-count">0</span></div>
+                </div>
             </div>
+
+            <div class="divider"></div>
             
             <div id="pet-actions"> <!-- Pet actions menu -->
-                <!-- Example actions -->
-                <button class="pet-action" data-action="milk">Milk</button>
-                <button class="pet-action" data-action="food">Food</button>
-                <button class="pet-action" data-action="wash">Wash</button>
-                <button class="pet-action" data-action="play1">Play1</button>
-                <button class="pet-action" data-action="play2">Play2</button>
-                <button class="pet-action" data-action="cuddle">Cuddle</button>
-                <button class="pet-action" data-action="dance">Dance</button>
-                <button class="pet-action" data-action="sleep">Sleep</button>
-                <button class="pet-action" data-action="toilet">Toilet</button>
-                <!-- Add more actions as needed -->
+                <button class="pet-action" data-action="milk"><img src="/images/icons/milk.png" alt="Milk"></button>
+                <button class="pet-action" data-action="food"><img src="images/icons/food.png" alt="Food"></button>
+                <button class="pet-action" data-action="wash"><img src="images/icons/wash.png" alt="Wash"></button>
+                <button class="pet-action" data-action="play1"><img src="images/icons/play1.png" alt="Play1"></button>
+                <button class="pet-action" data-action="play2"><img src="images/icons/play2.png" alt="Play2"></button>
+                <button class="pet-action" data-action="cuddle"><img src="images/icons/cuddle.png" alt="Cuddle"></button>
+                <button class="pet-action" data-action="dance"><img src="images/icons/dance.png" alt="Dance"></button>
+                <button class="pet-action" data-action="sleep"><img src="images/icons/sleep.png" alt="Sleep"></button>
+                <button class="pet-action" data-action="toilet"><img src="images/icons/toilet.png" alt="Toilet"></button>
             </div>
+            <div class="divider"></div>
+                <button class = "menu-button">Menu</button>
+            
         </div>
     </div>
+    <select id="saved-games-list"></select>
+    <button id="load-selected-game">Load Selected Game</button>
 
     <div id="shop-div" class="hidden">
         <!-- Shop content will be implemented later -->
     </div>
 
-    <script src="app.js" type="module"></script>
+    
+<audio id="gameMusic" src="/sounds/introMusic.mp3" loop hidden></audio>
+
+    <script src="/src/app.js" type="module"></script>
 </body>
 </html>
